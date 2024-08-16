@@ -18,7 +18,9 @@ export class TechnicianDataBank {
   @Column({ unique: true })
   CCI: string;
 
-  @OneToOne(() => TechnicianDataPay, (dataPay) => dataPay.dataBank)
+  @OneToOne(() => TechnicianDataPay, (dataPay) => dataPay.dataBank, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   dataPay: TechnicianDataPay;
 

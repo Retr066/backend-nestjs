@@ -90,10 +90,7 @@ export class TechnicianDataPayController {
         message: 'Se elimino correctamente',
       };
     } catch (error) {
-      throw new HttpException(
-        'Error al eliminar los datos de pago del técnico',
-        HttpStatus.NOT_FOUND,
-      );
+      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
     }
   }
 }

@@ -122,7 +122,7 @@ export class TechnicianDataPayService {
         await this.validateUniqueAccountNumberAndCCI(
           dataBank.accountNumber,
           dataBank.CCI,
-          technicianDataPay.dataBank.id, // Pasar el ID actual para la validación
+          technicianDataPay.dataBank.id,
         );
       }
 
@@ -165,17 +165,12 @@ export class TechnicianDataPayService {
         TechnicianDataPay,
         { where: { id }, relations: ['dataBank'] },
       );
+
       if (!technicianDataPay) {
         throw new Error(`No se encontró los datos de pagos con ID ${id}`);
       }
 
       await queryRunner.manager.remove(TechnicianDataPay, technicianDataPay);
-      if (technicianDataPay.dataBank) {
-        await queryRunner.manager.remove(
-          TechnicianDataBank,
-          technicianDataPay.dataBank,
-        );
-      }
 
       await queryRunner.commitTransaction();
     } catch (err) {
